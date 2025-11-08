@@ -36,7 +36,7 @@ const Contact = () => {
       icon: Mail,
       label: "Email",
       value: "campamentoconexionve@gmail.com",
-      href: "campamentoconexionve@gmail.com",
+      href: "mailto:campamentoconexionve@gmail.com",
       color: "primary",
     },
   ];
