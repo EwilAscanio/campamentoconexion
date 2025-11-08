@@ -12,12 +12,12 @@ const Footer = () => {
           {/* Partners/Sponsors */}
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-3">
-              <div className="px-4 py-2 bg-card/50 border border-border/50 rounded-lg">
-                <span className="font-bold text-foreground">ietra</span>
-              </div>
-              <div className="w-8 h-8 bg-card/50 border border-border/50 rounded-full flex items-center justify-center">
-                <span className="text-xs font-bold">A</span>
-              </div>
+              <img
+                src="/logoielfa.png"
+                alt="IELFA"
+                className="h-12 w-auto object-contain"
+              />
+              
             </div>
           </div>
 

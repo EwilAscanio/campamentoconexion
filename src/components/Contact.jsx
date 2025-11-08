@@ -1,4 +1,4 @@
-import { Phone, Mail, Instagram, Globe } from "lucide-react";
+import { Phone, Mail, Instagram, Globe, Youtube } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -19,17 +19,24 @@ const Contact = () => {
       color: "secondary",
     },
     {
-      icon: Globe,
-      label: "Sitio Web",
-      value: "www.campamentoconexion.com",
-      href: "https://www.campamentoconexion.com",
+      icon: Youtube,
+      label: "YouTube",
+      value: "@campamentoconexion",
+      href: "https://www.youtube.com/@campamentoconexion",
       color: "accent",
     },
+    // {
+    //   icon: Globe,
+    //   label: "Sitio Web",
+    //   value: "www.campamentoconexion.com",
+    //   href: "https://www.campamentoconexion.com",
+    //   color: "accent",
+    // },
     {
       icon: Mail,
       label: "Email",
       value: "campamentoconexionve@gmail.com",
-      href: "mailto:campamentoconexionve@gmail.com",
+      href: "campamentoconexionve@gmail.com",
       color: "primary",
     },
   ];

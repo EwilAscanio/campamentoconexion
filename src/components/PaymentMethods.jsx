@@ -1,9 +1,8 @@
 "use client";
 
-import { CreditCard, Smartphone, Building2, DollarSign } from "lucide-react";
+import { CreditCard, Smartphone, Building2, DollarSign, Wallet } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -14,20 +13,19 @@ import {
 } from "@/components/ui/dialog";
 
 const PaymentMethods = () => {
-  const [selectedMethod, setSelectedMethod] = useState(null);
 
   const paymentMethods = [
-    {
-      id: "zelle",
-      icon: DollarSign,
-      title: "Zelle",
-      description: "Pago instantáneo desde USA",
-      color: "primary",
-      details: {
-        email: "campamentoconexionve@gmail.com",
-        phone: "+1 (XXX) XXX-XXXX",
-      },
-    },
+    // {
+    //   id: "zelle",
+    //   icon: DollarSign,
+    //   title: "Zelle",
+    //   description: "Pago instantáneo desde USA",
+    //   color: "primary",
+    //   details: {
+    //     email: "campamentoconexionve@gmail.com",
+    //     phone: "+1 (XXX) XXX-XXXX",
+    //   },
+    // },
     {
       id: "pago-movil",
       icon: Smartphone,
@@ -40,31 +38,55 @@ const PaymentMethods = () => {
         cedula: "V-12345678",
       },
     },
+    // {
+    //   id: "transferencia",
+    //   icon: Building2,
+    //   title: "Transferencia Bancaria",
+    //   description: "Bancos nacionales",
+    //   color: "accent",
+    //   details: {
+    //     banco: "Banco de Venezuela",
+    //     titular: "Campamento Conexión",
+    //     cuenta: "0102-XXXX-XXXX-XXXX-XXXX",
+    //     rif: "J-XXXXXXXX-X",
+    //   },
+    // },
     {
-      id: "transferencia",
-      icon: Building2,
-      title: "Transferencia Bancaria",
-      description: "Bancos nacionales",
-      color: "accent",
-      details: {
-        banco: "Banco de Venezuela",
-        titular: "Campamento Conexión",
-        cuenta: "0102-XXXX-XXXX-XXXX-XXXX",
-        rif: "J-XXXXXXXX-X",
-      },
-    },
-    {
-      id: "efectivo",
-      icon: CreditCard,
-      title: "Efectivo",
-      description: "Pago en persona",
+      id: "paypal",
+      icon: Wallet,
+      title: "PayPal",
+      description: "Pago internacional seguro",
       color: "primary",
       details: {
-        ubicacion: "Oficinas del Campamento",
-        horario: "Lunes a Viernes: 9am - 5pm",
-        contacto: "0422-6461427",
+        enlace: "https://paypal.me/juanipro?country.x=VE&locale.x=es_XC",
+        descripcion: "Pago seguro con PayPal",
+        soporte: "Disponible 24/7",
       },
     },
+    {
+      id: "binance",
+      icon: Wallet,
+      title: "Binance",
+      description: "Criptomonedas y USDT",
+      color: "secondary",
+      details: {
+        enlace: "https://s.binance.com/vwSpX2M1",
+        descripcion: "Pago con criptomonedas Abono minimo 20$",
+        monedas: "USDT y BTC",
+      },
+    },
+    // {
+    //   id: "efectivo",
+    //   icon: CreditCard,
+    //   title: "Efectivo",
+    //   description: "Pago en persona",
+    //   color: "accent",
+    //   details: {
+    //     ubicacion: "Oficinas del Campamento",
+    //     horario: "Lunes a Viernes: 9am - 5pm",
+    //     contacto: "0422-6461427",
+    //   },
+    // },
   ];
 
   return (
@@ -82,60 +104,76 @@ const PaymentMethods = () => {
         </div>
 
         {/* Payment Cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {paymentMethods.map((method) => {
             const Icon = method.icon;
             return (
-              <Dialog key={method.id}>
-                <DialogTrigger asChild>
-                  <Card className="bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_20px_hsl(var(--primary)/0.2)] group cursor-pointer">
-                    <CardContent className="p-6 text-center space-y-4">
-                      <div className={`w-16 h-16 mx-auto bg-${method.color}/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform`}>
-                        <Icon className={`w-8 h-8 text-${method.color}`} />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-bold text-foreground mb-2">
-                          {method.title}
-                        </h3>
-                        <p className="text-sm text-muted-foreground">
-                          {method.description}
-                        </p>
-                      </div>
+              <Card key={method.id} className="bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_20px_hsl(var(--primary)/0.2)] group">
+                <CardContent className="p-6 text-center space-y-4">
+                  <div className={`w-16 h-16 mx-auto bg-${method.color}/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                    <Icon className={`w-8 h-8 text-${method.color}`} />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-foreground mb-2">
+                      {method.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {method.description}
+                    </p>
+                  </div>
+                  <Dialog>
+                    <DialogTrigger asChild>
                       <Button variant="ghost" size="sm" className="w-full">
                         Ver Detalles
                       </Button>
-                    </CardContent>
-                  </Card>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-md">
-                  <DialogHeader>
-                    <DialogTitle className="flex items-center gap-3">
-                      <Icon className={`w-6 h-6 text-${method.color}`} />
-                      {method.title}
-                    </DialogTitle>
-                    <DialogDescription>
-                      Información para realizar tu pago
-                    </DialogDescription>
-                  </DialogHeader>
-                  <div className="space-y-4 py-4">
-                    {Object.entries(method.details).map(([key, value]) => (
-                      <div key={key} className="space-y-1">
-                        <p className="text-sm font-medium text-muted-foreground capitalize">
-                          {key.replace("-", " ")}
-                        </p>
-                        <p className="text-base font-semibold bg-muted p-3 rounded-lg">
-                          {value}
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-md">
+                      <DialogHeader>
+                        <DialogTitle className="flex items-center gap-3">
+                          <Icon className={`w-6 h-6 text-${method.color}`} />
+                          {method.title}
+                        </DialogTitle>
+                        <DialogDescription>
+                          Información para realizar tu pago
+                        </DialogDescription>
+                      </DialogHeader>
+                      <div className="space-y-4 py-4">
+                        {Object.entries(method.details).map(([key, value]) => (
+                          <div key={key} className="space-y-1">
+                            <p className="text-sm font-medium text-muted-foreground capitalize">
+                              {key.replace("-", " ")}
+                            </p>
+                            <p className="text-base font-semibold bg-muted p-3 rounded-lg">
+                              {value}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Botón de enlace solo para métodos que tienen enlaces válidos */}
+                      {method.details.enlace &&
+                       method.details.enlace !== "Enlace de PayPal próximamente" &&
+                       method.details.enlace.startsWith('http') && (
+                        <div className="pt-4 border-t border-border/50">
+                          <Button
+                            variant="hero"
+                            className="w-full"
+                            onClick={() => window.open(method.details.enlace, '_blank')}
+                          >
+                            Ir al Sitio de Pago
+                          </Button>
+                        </div>
+                      )}
+
+                      <div className="bg-primary/10 border border-primary/20 rounded-lg p-4">
+                        <p className="text-sm text-foreground/80">
+                          <strong>Importante:</strong> Después de realizar el pago, envía tu comprobante a nuestro WhatsApp o correo para confirmar tu inscripción.
                         </p>
                       </div>
-                    ))}
-                  </div>
-                  <div className="bg-primary/10 border border-primary/20 rounded-lg p-4">
-                    <p className="text-sm text-foreground/80">
-                      <strong>Importante:</strong> Después de realizar el pago, envía tu comprobante a nuestro WhatsApp o correo para confirmar tu inscripción.
-                    </p>
-                  </div>
-                </DialogContent>
-              </Dialog>
+                    </DialogContent>
+                  </Dialog>
+                </CardContent>
+              </Card>
             );
           })}
         </div>
