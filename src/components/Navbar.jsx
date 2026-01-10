@@ -81,7 +81,7 @@ const Navbar = () => {
             <Button
               variant="hero"
               size="default"
-              onClick={() => scrollToSection("#contacto")}
+              onClick={() => window.open("https://forms.gle/mxCFi1uE5sv4CfvZ7", "_blank")}
             >
               <Phone className="w-4 h-4" />
               Inscríbete

@@ -33,9 +33,9 @@ const PaymentMethods = () => {
       description: "Transferencia inmediata",
       color: "secondary",
       details: {
-        banco: "Banco de Venezuela",
-        telefono: "0424-1234567",
-        cedula: "V-12345678",
+        banco: "Banco Nacional de Crédito (BNC)",
+        telefono: "0424-4263045",
+        cedula: "V-24.644.824",
       },
     },
     // {
@@ -152,18 +152,18 @@ const PaymentMethods = () => {
 
                       {/* Botón de enlace solo para métodos que tienen enlaces válidos */}
                       {method.details.enlace &&
-                       method.details.enlace !== "Enlace de PayPal próximamente" &&
-                       method.details.enlace.startsWith('http') && (
-                        <div className="pt-4 border-t border-border/50">
-                          <Button
-                            variant="hero"
-                            className="w-full"
-                            onClick={() => window.open(method.details.enlace, '_blank')}
-                          >
-                            Ir al Sitio de Pago
-                          </Button>
-                        </div>
-                      )}
+                        method.details.enlace !== "Enlace de PayPal próximamente" &&
+                        method.details.enlace.startsWith('http') && (
+                          <div className="pt-4 border-t border-border/50">
+                            <Button
+                              variant="hero"
+                              className="w-full"
+                              onClick={() => window.open(method.details.enlace, '_blank')}
+                            >
+                              Ir al Sitio de Pago
+                            </Button>
+                          </div>
+                        )}
 
                       <div className="bg-primary/10 border border-primary/20 rounded-lg p-4">
                         <p className="text-sm text-foreground/80">
@@ -190,12 +190,12 @@ const PaymentMethods = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
                 <Button variant="hero" size="lg" asChild>
-                  <a href="tel:+584226461427">
+                  <a href="tel:+584123551408">
                     Contactar por Teléfono
                   </a>
                 </Button>
                 <Button variant="accent" size="lg" asChild>
-                  <a href="https://wa.me/584226461427" target="_blank" rel="noopener noreferrer">
+                  <a href="https://wa.me/584123551408" target="_blank" rel="noopener noreferrer">
                     WhatsApp
                   </a>
                 </Button>

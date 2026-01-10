@@ -20,7 +20,7 @@ const EventDetails = () => {
         </div>
 
         {/* Details Cards */}
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
+        <div className="grid md:grid-cols-2 gap-6 mb-12">
           {/* Date Card */}
           <Card className="bg-card/50 backdrop-blur-sm border-primary/20 hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_30px_hsl(var(--primary)/0.3)] group">
             <CardContent className="p-8 text-center space-y-4">
@@ -58,6 +58,9 @@ const EventDetails = () => {
           </Card>
 
           {/* Includes Card */}
+          {
+            /* This card is similar to the Includes Banner but in a card format 
+          
           <Card className="bg-card/50 backdrop-blur-sm border-accent/20 hover:border-accent/50 transition-all duration-300 hover:shadow-[0_0_30px_hsl(var(--accent)/0.3)] group">
             <CardContent className="p-8 text-center space-y-4">
               <div className="w-16 h-16 mx-auto bg-accent/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -76,6 +79,8 @@ const EventDetails = () => {
               </div>
             </CardContent>
           </Card>
+          */}
+
         </div>
 
         {/* Includes Banner */}
