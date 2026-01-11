@@ -75,8 +75,9 @@ const Hero = () => {
               size="xl"
               className="min-w-[200px]"
               onClick={() => {
-                const detailsSection = document.getElementById('detalles');
-                detailsSection?.scrollIntoView({ behavior: 'smooth' });
+                
+                window.open("https://forms.gle/mxCFi1uE5sv4CfvZ7", "_blank")
+
               }}
             >
               Ver Detalles
