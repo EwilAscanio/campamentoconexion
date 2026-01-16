@@ -6,7 +6,11 @@ const Footer = () => {
           {/* Brand */}
           <div className="text-center md:text-left">
             <h3 className="text-xl font-black text-gradient">CONEXIÓN 2026</h3>
-            <p className="text-sm text-muted-foreground">Permanecer en Cristo</p>
+            <img
+              src="/permanecer.png"
+              alt="Permanecer en Cristo"
+              className="h-16 mx-auto object-contain"
+            />
           </div>
 
           {/* Partners/Sponsors */}

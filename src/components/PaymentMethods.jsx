@@ -12,20 +12,97 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
+const BinanceIcon = ({ className }) => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 32 32"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
+    <path d="M15.986 1.019l9.189 9.159-3.396 3.393-5.793-5.793-5.793 5.823-3.396-3.393 9.189-9.189zM4.399 12.605l3.365 3.395-3.363 3.365-3.396-3.365zM15.986 12.607l3.394 3.363-3.395 3.395-3.395-3.365 3.395-3.393zM27.572 12.605l3.423 3.395-3.393 3.395-3.395-3.395zM21.778 18.399l3.396 3.393-9.189 9.189-9.189-9.187 3.396-3.395 5.793 5.823 5.793-5.823z" />
+  </svg>
+);
+
+const BinanceTotalIcon = ({ className }) => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 32 32"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
+    <path d="M15.986 1.019l9.189 9.159-3.396 3.393-5.793-5.793-5.793 5.823-3.396-3.393 9.189-9.189zM4.399 12.605l3.365 3.395-3.363 3.365-3.396-3.365zM15.986 12.607l3.394 3.363-3.395 3.395-3.395-3.365 3.395-3.393zM27.572 12.605l3.423 3.395-3.393 3.395-3.395-3.395zM21.778 18.399l3.396 3.393-9.189 9.189-9.189-9.187 3.396-3.395 5.793 5.823 5.793-5.823z" />
+  </svg>
+);
+
+const PaypalIcon = ({ className }) => (
+  <svg
+    fill="currentColor"
+    width="24"
+    height="24"
+    viewBox="0 0 512 512"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
+    <path d="M424.81,148.79c-.43,2.76-.93,5.58-1.49,8.48-19.17,98-84.76,131.8-168.54,131.8H212.13a20.67,20.67,0,0,0-20.47,17.46L169.82,444.37l-6.18,39.07a10.86,10.86,0,0,0,9.07,12.42,10.72,10.72,0,0,0,1.7.13h75.65a18.18,18.18,0,0,0,18-15.27l.74-3.83,14.24-90,.91-4.94a18.16,18.16,0,0,1,18-15.3h11.31c73.3,0,130.67-29.62,147.44-115.32,7-35.8,3.38-65.69-15.16-86.72A72.27,72.27,0,0,0,424.81,148.79Z"/>
+    <path d="M385.52,51.09C363.84,26.52,324.71,16,274.63,16H129.25a20.75,20.75,0,0,0-20.54,17.48l-60.55,382a12.43,12.43,0,0,0,10.39,14.22,12.58,12.58,0,0,0,1.94.15h89.76l22.54-142.29-.7,4.46a20.67,20.67,0,0,1,20.47-17.46h42.65c83.77,0,149.36-33.86,168.54-131.8.57-2.9,1.05-5.72,1.49-8.48h0C410.94,98.06,405.19,73.41,385.52,51.09Z"/>
+  </svg>
+);
+
+const PagoMovilIcon = ({ className }) => (
+  <svg
+    fill="currentColor"
+    viewBox="0 0 32 32"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
+    <path d="M16 2c-7.732 0-14 6.268-14 14s6.268 14 14 14 14-6.268 14-14-6.268-14-14-14zM16 26c-5.514 0-10-4.486-10-10s4.486-10 10-10 10 4.486 10 10-4.486 10-10 10z"/>
+    <path d="M22 12h-12v8h12v-8zM20 18h-8v-4h8v4z"/>
+  </svg>
+);
+
+const ZelleIcon = ({ className }) => (
+  <svg
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+    className={className}
+  >
+    <path d="M13.559 24h-2.841a0.483 0.483 0 0 1 -0.483 -0.483v-2.765H5.638a0.667 0.667 0 0 1 -0.666 -0.666v-2.234a0.67 0.67 0 0 1 0.142 -0.412l8.139 -10.382h-7.25a0.667 0.667 0 0 1 -0.667 -0.667V3.914c0 -0.367 0.299 -0.666 0.666 -0.666h4.23V0.483c0 -0.266 0.217 -0.483 0.483 -0.483h2.841c0.266 0 0.483 0.217 0.483 0.483v2.765h4.323c0.367 0 0.666 0.299 0.666 0.666v2.137a0.67 0.67 0 0 1 -0.141 0.41l-8.19 10.481h7.665c0.367 0 0.666 0.299 0.666 0.666v2.477a0.667 0.667 0 0 1 -0.666 0.667h-4.32v2.765a0.483 0.483 0 0 1 -0.483 0.483Z" stroke-width="1"/>
+  </svg>
+);
+
+const DollarSignIcon = ({ className }) => (
+  <svg
+    fill="currentColor"
+    viewBox="0 0 32 32"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
+    <path d="M16 2c-7.732 0-14 6.268-14 14s6.268 14 14 14 14-6.268 14-14-6.268-14-14-14zM16 26c-5.514 0-10-4.486-10-10s4.486-10 10-10 10 4.486 10 10-4.486 10-10 10z"/>
+    <path d="M18 8h-4v4h4v2h-4v8h-2v-8h-2v-2h2v-4h2v4h4v2z"/>
+  </svg>
+);
+
 const PaymentMethods = () => {
 
   const paymentMethods = [
-    // {
-    //   id: "zelle",
-    //   icon: DollarSign,
-    //   title: "Zelle",
-    //   description: "Pago instantáneo desde USA",
-    //   color: "primary",
-    //   details: {
-    //     email: "campamentoconexionve@gmail.com",
-    //     phone: "+1 (XXX) XXX-XXXX",
-    //   },
-    // },
+    {
+      id: "zelle",
+      icon: ZelleIcon,
+      title: "Zelle",
+      description: "Pago instantáneo desde USA",
+      color: "primary",
+      details: {
+        email: "campamentoconexionve@gmail.com",
+        phone: "+1 (XXX) XXX-XXXX",
+      },
+    },
     {
       id: "pago-movil",
       icon: Smartphone,
@@ -53,7 +130,7 @@ const PaymentMethods = () => {
     // },
     {
       id: "paypal",
-      icon: Wallet,
+      icon: PaypalIcon,
       title: "PayPal",
       description: "Pago internacional seguro",
       color: "primary",
@@ -65,8 +142,8 @@ const PaymentMethods = () => {
     },
     {
       id: "binance",
-      icon: Wallet,
-      title: "Binance",
+      icon: BinanceIcon,
+      title: "Binance Abono Mínimo",
       description: "Criptomonedas y USDT",
       color: "secondary",
       details: {
@@ -75,18 +152,30 @@ const PaymentMethods = () => {
         monedas: "USDT y BTC",
       },
     },
-    // {
-    //   id: "efectivo",
-    //   icon: CreditCard,
-    //   title: "Efectivo",
-    //   description: "Pago en persona",
-    //   color: "accent",
-    //   details: {
-    //     ubicacion: "Oficinas del Campamento",
-    //     horario: "Lunes a Viernes: 9am - 5pm",
-    //     contacto: "0422-6461427",
-    //   },
-    // },
+    {
+      id: "binanceTotal",
+      icon: BinanceTotalIcon,
+      title: "Binance Pago Completo",
+      description: "Criptomonedas y USDT",
+      color: "primary",
+      details: {
+        enlace: "https://s.binance.com/LlZhLBLM",
+        descripcion: "Pago Completo con criptomonedas 105$",
+        monedas: "USDT y BTC",
+      },
+    },
+    {
+      id: "efectivo",
+      icon: CreditCard,
+      title: "Efectivo",
+      description: "Pago en persona",
+      color: "accent",
+      details: {
+        ubicacion: "Oficinas del Campamento",
+        horario: "Lunes a Viernes: 9am - 5pm",
+        contacto: "0422-6461427",
+      },
+    },
   ];
 
   return (

@@ -3,9 +3,11 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const EventDetails = () => {
   const includes = [
-    "Transporte ida y vuelta",
-    "Hospedaje completo",
-    "Todas las comidas",
+    { text: "Transporte ida y vuelta", url: "https://maps.app.goo.gl/Lom2PS9ssommcTWN7" },
+    { text: "Hospedaje completo", url: "https://www.youtube.com/watch?v=qM6hBrMklHA" },
+    { text: "Todas las comidas", url: "https://www.youtube.com/watch?v=6uisO4ApG5s" },
+    { text: "Música en vivo", url: "https://www.youtube.com/watch?v=4kEBqLkuJ7M" },
+    { text: "Mucha Diversión", url: "https://www.youtube.com/watch?v=C6_HhSUsVQk" },
   ];
 
   return (
@@ -92,7 +94,9 @@ const EventDetails = () => {
             {includes.map((item, index) => (
               <div key={index} className="flex items-center gap-3 text-lg font-semibold">
                 <CheckCircle2 className="w-6 h-6 text-primary" />
-                <span>{item}</span>
+                <a href={item.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                  {item.text}
+                </a>
               </div>
             ))}
           </div>
