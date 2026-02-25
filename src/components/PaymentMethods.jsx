@@ -92,17 +92,17 @@ const DollarSignIcon = ({ className }) => (
 const PaymentMethods = () => {
 
   const paymentMethods = [
-    {
-      id: "zelle",
-      icon: ZelleIcon,
-      title: "Zelle",
-      description: "Pago instantáneo desde USA",
-      color: "primary",
-      details: {
-        email: "campamentoconexionve@gmail.com",
-        phone: "+1 (XXX) XXX-XXXX",
-      },
-    },
+    // {
+    //   id: "zelle",
+    //   icon: ZelleIcon,
+    //   title: "Zelle",
+    //   description: "Pago instantáneo desde USA",
+    //   color: "primary",
+    //   details: {
+    //     email: "campamentoconexionve@gmail.com",
+    //     phone: "+1 (XXX) XXX-XXXX",
+    //   },
+    // },
     {
       id: "pago-movil",
       icon: Smartphone,
@@ -110,9 +110,9 @@ const PaymentMethods = () => {
       description: "Transferencia inmediata",
       color: "secondary",
       details: {
-        banco: "Banco Nacional de Crédito (BNC)",
-        telefono: "0424-4263045",
-        cedula: "V-24.644.824",
+        banco: "Banco Mercantil",
+        telefono: "0414-7326258",
+        cedula: "V-16.461.587",
       },
     },
     // {
