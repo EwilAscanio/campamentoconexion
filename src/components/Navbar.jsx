@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -8,12 +10,13 @@ import { cn } from "@/lib/utils";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
 
   const navItems = [
-    { label: "Inicio", href: "#inicio" },
-    { label: "Detalles", href: "#detalles" },
-    { label: "Pagos", href: "#pagos" },
-    { label: "Contacto", href: "#contacto" },
+    { label: "Inicio", href: "/#inicio" },
+    { label: "Detalles", href: "/#detalles" },
+    { label: "Pagos", href: "/#pagos" },
+    { label: "Contacto", href: "/#contacto" },
   ];
 
   useEffect(() => {
@@ -25,11 +28,38 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (href) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+  useEffect(() => {
+    // Handle scroll to section after navigation from another page
+    if (pathname === "/" && window.location.hash) {
+      const element = document.querySelector(window.location.hash);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    }
+  }, [pathname]);
+
+  const handleNavClick = (e, href) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      const hash = href.replace("/", "");
+      const element = document.querySelector(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
       setIsOpen(false);
+    }
+    // Si no estamos en la página principal, el Link se encarga de la navegación
+  };
+
+  const handleLogoClick = (e) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      const element = document.querySelector("#inicio");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
 
@@ -45,8 +75,9 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo/Brand */}
-          <button
-            onClick={() => scrollToSection("#inicio")}
+          <Link
+            href="/#inicio"
+            onClick={handleLogoClick}
             className="flex items-center gap-3 group"
           >
             <div className="w-10 h-10 md:w-12 md:h-12 relative">
@@ -61,19 +92,26 @@ const Navbar = () => {
               </h1>
               <p className="text-xs text-muted-foreground">Permanecer</p>
             </div>
-          </button>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
             {navItems.map((item) => (
-              <button
+              <Link
                 key={item.href}
-                onClick={() => scrollToSection(item.href)}
+                href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
                 className="px-4 py-2 text-sm font-semibold text-foreground/80 hover:text-primary transition-colors rounded-lg hover:bg-primary/10"
               >
                 {item.label}
-              </button>
+              </Link>
             ))}
+            <Link
+              href="/juegos"
+              className="px-4 py-2 text-sm font-semibold text-foreground/80 hover:text-primary transition-colors rounded-lg hover:bg-primary/10"
+            >
+              Juegos
+            </Link>
           </div>
 
           {/* CTA Button (Desktop) */}
@@ -107,19 +145,30 @@ const Navbar = () => {
         >
           <div className="flex flex-col space-y-2 pt-4 border-t border-border/50">
             {navItems.map((item) => (
-              <button
+              <Link
                 key={item.href}
-                onClick={() => scrollToSection(item.href)}
+                href={item.href}
+                onClick={(e) => {
+                  handleNavClick(e, item.href);
+                  setIsOpen(false);
+                }}
                 className="px-4 py-3 text-left text-sm font-semibold text-foreground/80 hover:text-primary hover:bg-primary/10 rounded-lg transition-colors"
               >
                 {item.label}
-              </button>
+              </Link>
             ))}
+            <Link
+              href="/juegos"
+              onClick={() => setIsOpen(false)}
+              className="px-4 py-3 text-left text-sm font-semibold text-foreground/80 hover:text-primary hover:bg-primary/10 rounded-lg transition-colors"
+            >
+              Juegos
+            </Link>
             <Button
               variant="hero"
               size="default"
               className="w-full mt-2"
-              onClick={() => scrollToSection("#contacto")}
+              onClick={() => window.open("https://forms.gle/mxCFi1uE5sv4CfvZ7", "_blank")}
             >
               <Phone className="w-4 h-4" />
               Inscríbete Ahora
