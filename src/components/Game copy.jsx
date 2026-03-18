@@ -1,13 +1,8 @@
-"use client"
-
-import { useState, useEffect, useCallback } from "react";
-import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Trophy, Users, Flame, Star, Target, Zap, CircleDot, Footprints, Brain, TableProperties, Coins, ChevronLeft, ChevronRight, Play } from "lucide-react";
+import { Trophy, Users, Flame, Star, Target, Zap, CircleDot, Footprints, Brain, TableProperties, Coins } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
 
 const deportes = [
   {
@@ -42,7 +37,7 @@ const deportes = [
   },
   {
     nombre: "Ajedrez",
-    descripcion: "Desafía tu mente en partidas estratégicas. La inteligencia también compite.",
+    descripcion: "Desafía tu mente en partidas estratégicas. Activa tu estrategia.",
     icon: Brain,
     jugadores: "1 vs 1",
   },
@@ -76,7 +71,6 @@ const recreativos = [
     descripcion: "Dinámicas grupales diseñadas para conectar, reír y crear lazos inolvidables.",
     icon: Users,
   },
-  
 ];
 
 const equiposPuntuacion = [
@@ -86,209 +80,28 @@ const equiposPuntuacion = [
   { nombre: "Equipo 4", dia1: 0, dia2: 0, dia3: 0, dia4: 0, total: 0 },
 ];
 
-const carouselSlides = [
-  {
-    type: "image",
-    src: "/carousel-volleyball.jpg",
-    title: "¡Voleibol!",
-    subtitle: "Torneos emocionantes de voleibol en equipos mixtos",
-    cta: "Ver Deportes",
-    targetId: "deportes",
-  },
-  {
-    type: "image",
-    src: "/carousel-football.jpg",
-    title: "¡Fútbol!",
-    subtitle: "Partidos intensos donde la pasión y el trabajo en equipo marcan la diferencia",
-    cta: "Ver Deportes",
-    targetId: "deportes",
-  },
-  {
-    type: "image",
-    src: "/carousel-basketball.jpg",
-    title: "¡Basketball!",
-    subtitle: "Competencias llenas de adrenalina. ¡Anota y lleva a tu equipo a la victoria!",
-    cta: "Ver Deportes",
-    targetId: "deportes",
-  },
-  {
-    type: "image",
-    src: "/carousel-baseball5.jpg",
-    title: "¡Beisbol Five!",
-    subtitle: "La nueva modalidad urbana del béisbol. Sin bate, sin guante, ¡solo tus manos!",
-    cta: "Ver Deportes",
-    targetId: "deportes",
-  },
-  {
-    type: "image",
-    src: "/kikimball.jpg",
-    title: "¡Kikimbol!",
-    subtitle: "El clásico juego de patear la pelota con toda la emoción de un partido de béisbol",
-    cta: "Ver Deportes",
-    targetId: "deportes",
-  },
-  {
-    type: "image",
-    src: "/carousel-chess.jpg",
-    title: "¡Ajedrez!",
-    subtitle: "Desafía tu mente en partidas estratégicas. La inteligencia también compite",
-    cta: "Ver Deportes",
-    targetId: "deportes",
-  },
-  {
-    type: "image",
-    src: "/carousel-domino.jpg",
-    title: "¡Domino!",
-    subtitle: "Juego clásico de estrategia y habilidad. ¡El que más suma gana!",
-    cta: "Ver Deportes",
-    targetId: "deportes",
-  },
-  {
-    type: "image",
-    src: "/carousel-pingpong.jpg",
-    title: "¡Ping Pong!",
-    subtitle: "Torneos rápidos y emocionantes de tenis de mesa. ¡Reflejos y precisión al máximo!",
-    cta: "Ver Deportes",
-    targetId: "deportes",
-  },
-  {
-    type: "image",
-    src: "/carousel-recreational.jpg",
-    title: "¡Juegos Recreativos!",
-    subtitle: "Actividades llenas de risas, retos y momentos inolvidables",
-    cta: "Ver Recreativos",
-    targetId: "recreativos",
-  },
-];
-
 const Games = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-
-  const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev + 1) % carouselSlides.length);
-    setIsVideoPlaying(false);
-  }, []);
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + carouselSlides.length) % carouselSlides.length);
-    setIsVideoPlaying(false);
-  };
-
-  useEffect(() => {
-    if (isVideoPlaying) return;
-    const timer = setInterval(nextSlide, 5000);
-    return () => clearInterval(timer);
-  }, [isVideoPlaying, nextSlide]);
-
-  const scrollToSection = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <main className="pt-20 pb-16">
-        {/* Carousel Hero */}
-        <section className="relative w-full h-[60vh] md:h-[70vh] overflow-hidden mb-16">
-          {carouselSlides.map((slide, index) => (
-            <div
-              key={index}
-              className={`absolute inset-0 transition-opacity duration-700 ${
-                index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
-              }`}
-            >
-              {slide.type === "video" ? (
-                <div className="relative w-full h-full">
-                  {isVideoPlaying && index === currentSlide ? (
-                    <video
-                      className="w-full h-full object-cover"
-                      src={slide.src}
-                      poster={slide.poster}
-                      autoPlay
-                      controls
-                      onEnded={() => { setIsVideoPlaying(false); nextSlide(); }}
-                    />
-                  ) : (
-                    <>
-                      <Image
-                        src={slide.poster}
-                        alt={slide.title}
-                        fill
-                        className="object-cover"
-                        priority={index === 0}
-                      />
-                      <button
-                        onClick={() => setIsVideoPlaying(true)}
-                        className="absolute inset-0 flex items-center justify-center z-20"
-                      >
-                        <div className="w-20 h-20 rounded-full bg-primary/90 flex items-center justify-center hover:scale-110 transition-transform shadow-lg">
-                          <Play className="w-8 h-8 text-primary-foreground ml-1" />
-                        </div>
-                      </button>
-                    </>
-                  )}
-                </div>
-              ) : (
-                <Image
-                  src={slide.src}
-                  alt={slide.title}
-                  fill
-                  className="object-cover"
-                  priority={index === 0}
-                />
-              )}
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent z-10" />
-              {/* Content */}
-              {!(slide.type === "video" && isVideoPlaying && index === currentSlide) && (
-                <div className="absolute inset-0 z-20 flex flex-col items-center justify-end pb-16 px-4 text-center">
-                  <h2 className="text-3xl md:text-5xl font-black text-foreground mb-3 drop-shadow-lg">
-                    {slide.title}
-                  </h2>
-                  <p className="text-lg md:text-xl text-muted-foreground mb-6 max-w-xl">
-                    {slide.subtitle}
-                  </p>
-                  <Button
-                    variant="hero"
-                    size="xl"
-                    onClick={() => scrollToSection(slide.targetId)}
-                  >
-                    {slide.cta}
-                  </Button>
-                </div>
-              )}
-            </div>
-          ))}
-          {/* Navigation arrows */}
-          <button
-            onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-background/80 border border-border/50 flex items-center justify-center hover:bg-background transition-colors"
-          >
-            <ChevronLeft className="w-6 h-6 text-foreground" />
-          </button>
-          <button
-            onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-background/80 border border-border/50 flex items-center justify-center hover:bg-background transition-colors"
-          >
-            <ChevronRight className="w-6 h-6 text-foreground" />
-          </button>
-          {/* Dots */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex gap-2">
-            {carouselSlides.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => { setCurrentSlide(index); setIsVideoPlaying(false); }}
-                className={`w-3 h-3 rounded-full transition-all ${
-                  index === currentSlide ? "bg-primary w-8" : "bg-foreground/30"
-                }`}
-              />
-            ))}
+      <main className="pt-24 pb-16">
+        {/* Hero */}
+        <section className="container mx-auto px-4 text-center mb-16">
+          <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 rounded-full px-4 py-2 mb-6">
+            <Trophy className="w-4 h-4 text-primary" />
+            <span className="text-sm font-semibold text-primary">Actividades & Deportes</span>
           </div>
+          <h1 className="text-4xl md:text-6xl font-black graffiti-text text-gradient mb-4">
+            JUEGOS
+          </h1>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+            Prepárate para vivir la competencia sana, la diversión y el compañerismo. 
+            ¡Ven listo para darlo todo!
+          </p>
         </section>
 
         {/* Deportes */}
-        <section id="deportes" className="container mx-auto px-4 mb-20">
+        <section className="container mx-auto px-4 mb-20">
           <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2 text-center">
             🏆 Deportes
           </h2>
@@ -319,7 +132,7 @@ const Games = () => {
         </section>
 
         {/* Recreativos */}
-        <section id="recreativos" className="container mx-auto px-4 mb-20">
+        <section className="container mx-auto px-4 mb-20">
           <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2 text-center">
             🎉 Juegos Recreativos
           </h2>
@@ -373,7 +186,7 @@ const Games = () => {
                       <TableHead className="text-center text-foreground font-bold">Día 2 🪙</TableHead>
                       <TableHead className="text-center text-foreground font-bold">Día 3 🪙</TableHead>
                       <TableHead className="text-center text-foreground font-bold">Día 4 🪙</TableHead>
-                      <TableHead className="text-center text-foreground font-bold">Total 🪙</TableHead>
+                      <TableHead className="text-center text-foreground font-bold ">Total 🪙</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
