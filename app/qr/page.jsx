@@ -1,23 +1,18 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { QRCodeSVG } from "qrcode.react";
-import { Search } from "lucide-react";
+import { Search, Download } from "lucide-react";
+import html2canvas from "html2canvas";
 
 export default function QrGenerator() {
   const [cedula, setCedula] = useState("");
   const [acampante, setAcampante] = useState(null);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  // Cargar datos del listado de acampantes
-  useEffect(() => {
-    // Los datos están en public/listado_acampantes.json
-    // Podrías cargarlos con fetch o importarlos directamente
-  }, []);
 
   const buscarAcampante = async () => {
     if (!cedula.trim()) {
@@ -27,14 +22,14 @@ export default function QrGenerator() {
 
     setIsLoading(true);
     setError("");
-    
+
     try {
-      // Buscar en el archivo JSON
-      const response = await fetch('/listado_acampantes.json');
+      // Buscar en el archivo JSON local
+      const response = await fetch("/listado_acampantes.json");
       const data = await response.json();
-      
-      const encontrado = data.find(item => 
-        item.cedula.toString() === cedula.trim()
+
+      const encontrado = data.find(
+        (item) => item.cedula.toString() === cedula.trim()
       );
 
       if (encontrado) {
@@ -44,7 +39,9 @@ export default function QrGenerator() {
         setError("No se encontró ningún acampante con esa cédula");
       }
     } catch (err) {
-      setError("Error al buscar el acampante");
+      setError(
+        "Error al buscar el acampante. Verifica que el archivo JSON exista."
+      );
       console.error(err);
     } finally {
       setIsLoading(false);
@@ -52,8 +49,32 @@ export default function QrGenerator() {
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       buscarAcampante();
+    }
+  };
+
+  // Función para descargar la tarjeta con estilos exactos
+  const handleDownload = async () => {
+    const cardElement = document.getElementById("qr-card");
+
+    if (!cardElement) return;
+
+    try {
+      const canvas = await html2canvas(cardElement, {
+        scale: 2, // Mayor calidad para que la pistola lo lea bien
+        useCORS: true,
+        backgroundColor: "#ffffff", // Fuerza el fondo blanco
+      });
+
+      const image = canvas.toDataURL("image/png");
+      const downloadLink = document.createElement("a");
+      downloadLink.href = image;
+      downloadLink.download = `Pase-Comedor-${acampante.cedula}.png`;
+      downloadLink.click();
+    } catch (err) {
+      console.error("Error al generar la imagen:", err);
+      alert("Hubo un error al descargar el pase.");
     }
   };
 
@@ -64,10 +85,11 @@ export default function QrGenerator() {
           {/* Encabezado */}
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-6xl font-black text-gradient mb-4">
-              Generador de QR
+              Pase de Comedor
             </h1>
             <p className="text-lg text-muted-foreground">
-              Busca un acampante por su número de cédula y genera su código QR
+              Busca tu número de cédula, genera tu código QR y guárdalo en tu
+              teléfono.
             </p>
           </div>
 
@@ -85,7 +107,7 @@ export default function QrGenerator() {
                   <Label htmlFor="cedula">Número de Cédula</Label>
                   <Input
                     id="cedula"
-                    placeholder="Ingrese el número de cédula"
+                    placeholder="Ingrese su número de cédula"
                     value={cedula}
                     onChange={(e) => setCedula(e.target.value)}
                     onKeyPress={handleKeyPress}
@@ -93,7 +115,7 @@ export default function QrGenerator() {
                   />
                 </div>
                 <div className="flex items-end">
-                  <Button 
+                  <Button
                     onClick={buscarAcampante}
                     disabled={isLoading}
                     className="h-full px-8 text-lg"
@@ -103,123 +125,105 @@ export default function QrGenerator() {
                 </div>
               </div>
               {error && (
-                <p className="text-red-500 mt-2">{error}</p>
+                <p className="text-red-500 mt-2 font-medium">{error}</p>
               )}
             </CardContent>
           </Card>
 
           {/* Resultado */}
           {acampante && (
-            <Card id="qr-card" className="border-none shadow-xl max-w-2xl mx-auto">
-              <CardContent className="p-6">
-                <div className="grid md:grid-cols-2 gap-6 items-center">
-                  {/* Información del acampante */}
-                  <div className="space-y-4">
-                    <div className="space-y-1">
-                      <h2 className="text-xl font-bold text-foreground">
-                        {acampante.nombres} {acampante.apellidos}
-                      </h2>
-                      <p className="text-lg text-primary font-semibold">
-                        Cédula: {acampante.cedula}
-                      </p>
-                    </div>
+            <div className="space-y-6">
+              {/* Tarjeta a Descargar */}
+              <Card
+                id="qr-card"
+                className="border-2 border-slate-200 shadow-xl max-w-2xl mx-auto bg-white overflow-hidden relative"
+              >
+                {/* Franja decorativa superior para darle aspecto de carnet */}
+                <div className="bg-primary h-3 w-full"></div>
 
-                    <div className="flex gap-2">
-                      <Button 
-                        onClick={() => window.print()}
-                        variant="outline"
-                        size="sm"
-                        className="flex-1"
-                      >
-                        Imprimir
-                      </Button>
-                      <Button 
-                        onClick={() => {
-                          // Descargar tarjeta completa como imagen
-                          const card = document.getElementById('qr-card');
-                          
-                          // Crear un SVG que contenga todo el card
-                          const serializer = new XMLSerializer();
-                          const svgData = serializer.serializeToString(card);
-                          
-                          // Crear canvas para renderizar
-                          const canvas = document.createElement('canvas');
-                          const ctx = canvas.getContext('2d');
-                          
-                          // Obtener dimensiones reales del card
-                          const rect = card.getBoundingClientRect();
-                          canvas.width = rect.width;
-                          canvas.height = rect.height;
-                          
-                          // Crear un SVG con dimensiones y namespace correctos
-                          const svgWithSize = `
-                            <svg xmlns="http://www.w3.org/2000/svg" 
-                                 width="${rect.width}" 
-                                 height="${rect.height}">
-                              <foreignObject width="100%" height="100%">
-                                <div xmlns="http://www.w3.org/1999/xhtml" style="width: 100%; height: 100%;">
-                                  ${card.innerHTML}
-                                </div>
-                              </foreignObject>
-                            </svg>`;
-                          
-                          const img = new Image();
-                          
-                          img.onload = () => {
-                            ctx.fillStyle = 'white';
-                            ctx.fillRect(0, 0, canvas.width, canvas.height);
-                            ctx.drawImage(img, 0, 0);
-                            const pngFile = canvas.toDataURL("image/png");
-                            const downloadLink = document.createElement('a');
-                            downloadLink.download = `tarjeta-${acampante.cedula}.png`;
-                            downloadLink.href = pngFile;
-                            downloadLink.click();
-                          };
-                          
-                          img.onerror = (err) => {
-                            console.error('Error al cargar la imagen:', err);
-                            alert('Error al generar la imagen. Por favor intente de nuevo.');
-                          };
-                          
-                          img.src = 'data:image/svg+xml;base64,' + btoa(svgWithSize);
-                        }}
-                        size="sm"
-                        className="flex-1"
-                      >
-                        Descargar
-                      </Button>
-                    </div>
-                  </div>
-
-                  {/* Código QR */}
-                  <div className="flex justify-center items-center">
-                    <div className="bg-white p-4 rounded-lg shadow-md">
-                      <div className="text-center mb-2">
-                        <h3 className="font-semibold text-sm">Código QR</h3>
+                <CardContent className="p-8">
+                  <div className="grid md:grid-cols-2 gap-8 items-center">
+                    {/* Información del acampante */}
+                    <div className="space-y-6 text-center md:text-left">
+                      <div>
+                        <p className="text-sm font-bold text-muted-foreground tracking-widest uppercase mb-1">
+                          Campamento Conexión 2026
+                        </p>
+                        <h2 className="text-2xl font-black text-slate-900 uppercase leading-tight">
+                          {acampante.nombres} <br /> {acampante.apellidos}
+                        </h2>
+                        <p className="text-xl text-primary font-bold mt-2">
+                          V-{acampante.cedula}
+                        </p>
                       </div>
-                      <div className="flex justify-center">
+
+                      {/* Reemplaza el div de "Pase de Alimentación" por este que tiene estilos forzados */}
+                      {/* <div
+                        style={{
+                          backgroundColor: "#f1f5f9", // Un gris claro (slate-100)
+                          padding: "8px 16px",
+                          borderRadius: "8px",
+                          display: "inline-block",
+                          marginTop: "16px",
+                          border: "1px solid #e2e8f0", // Añadimos un borde fino para asegurar visibilidad
+                        }}
+                      >
+                        <p
+                          style={{
+                            fontSize: "12px",
+                            fontWeight: "800",
+                            color: "#475569", // Un gris oscuro (slate-600)
+                            textTransform: "uppercase",
+                            textAlign: "center",
+                            margin: 0,
+                            fontFamily: "Arial, sans-serif",
+                          }}
+                        >
+                          Pase de Alimentación
+                        </p>
+                      </div> */}
+                      {/* fin pase Alimentación */}
+                    </div>
+
+                    {/* Código QR */}
+                    <div className="flex justify-center items-center">
+                      <div className="bg-white p-4 rounded-xl shadow-sm border-2 border-slate-100">
                         <QRCodeSVG
-                          id="qr-code"
                           value={acampante.cedula.toString()}
-                          size={192}
+                          size={180}
                           level="H"
                           includeMargin={true}
                         />
                       </div>
                     </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+
+              {/* Botón de acción (Fuera de la tarjeta para que no salga en la foto) */}
+              <div className="flex justify-center">
+                <Button
+                  onClick={handleDownload}
+                  size="lg"
+                  className="px-10 text-lg font-bold gap-2 shadow-lg hover:scale-105 transition-transform"
+                >
+                  <Download className="w-5 h-5" />
+                  Descargar Pase
+                </Button>
+              </div>
+
+              <p className="text-center text-red-500 font-bold animate-pulse">
+                ⚠️ IMPORTANTE: Descarga esta imagen y guárdala en tus fotos
+                favoritas. No habrá internet en el campamento.
+              </p>
+            </div>
           )}
 
-          {/* Mensaje cuando no hay resultados */}
-          {!acampante && cedula && !error && !isLoading && (
-            <Card className="border-none shadow-xl">
-              <CardContent className="p-8 text-center">
-                <p className="text-muted-foreground">
-                  No se ha realizado una búsqueda o no se encontró ningún acampante.
-                </p>
+          {/* Mensaje cuando no hay resultados (Oculto si hubo éxito o error) */}
+          {!acampante && !error && !isLoading && (
+            <Card className="border-none shadow-sm bg-transparent">
+              <CardContent className="p-8 text-center text-muted-foreground font-medium">
+                Ingresa tu número de cédula para generar tu pase de comedor.
               </CardContent>
             </Card>
           )}
