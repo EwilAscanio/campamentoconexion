@@ -112,6 +112,12 @@ const Navbar = () => {
             >
               Juegos
             </Link>
+            <Link
+              href="/qr"
+              className="px-4 py-2 text-sm font-semibold text-foreground/80 hover:text-primary transition-colors rounded-lg hover:bg-primary/10"
+            >
+              Generar QR
+            </Link>
           </div>
 
           {/* CTA Button (Desktop) */}
@@ -163,6 +169,13 @@ const Navbar = () => {
               className="px-4 py-3 text-left text-sm font-semibold text-foreground/80 hover:text-primary hover:bg-primary/10 rounded-lg transition-colors"
             >
               Juegos
+            </Link>
+            <Link
+              href="/qr"
+              onClick={() => setIsOpen(false)}
+              className="px-4 py-3 text-left text-sm font-semibold text-foreground/80 hover:text-primary hover:bg-primary/10 rounded-lg transition-colors"
+            >
+              Generar QR
             </Link>
             <Button
               variant="hero"
