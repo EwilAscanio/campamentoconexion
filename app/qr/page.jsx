@@ -145,11 +145,29 @@ export default function QrGenerator() {
                           // Crear canvas para renderizar
                           const canvas = document.createElement('canvas');
                           const ctx = canvas.getContext('2d');
+                          
+                          // Obtener dimensiones reales del card
+                          const rect = card.getBoundingClientRect();
+                          canvas.width = rect.width;
+                          canvas.height = rect.height;
+                          
+                          // Crear un SVG con dimensiones y namespace correctos
+                          const svgWithSize = `
+                            <svg xmlns="http://www.w3.org/2000/svg" 
+                                 width="${rect.width}" 
+                                 height="${rect.height}">
+                              <foreignObject width="100%" height="100%">
+                                <div xmlns="http://www.w3.org/1999/xhtml" style="width: 100%; height: 100%;">
+                                  ${card.innerHTML}
+                                </div>
+                              </foreignObject>
+                            </svg>`;
+                          
                           const img = new Image();
                           
                           img.onload = () => {
-                            canvas.width = img.width;
-                            canvas.height = img.height;
+                            ctx.fillStyle = 'white';
+                            ctx.fillRect(0, 0, canvas.width, canvas.height);
                             ctx.drawImage(img, 0, 0);
                             const pngFile = canvas.toDataURL("image/png");
                             const downloadLink = document.createElement('a');
@@ -158,7 +176,12 @@ export default function QrGenerator() {
                             downloadLink.click();
                           };
                           
-                          img.src = 'data:image/svg+xml;base64,' + btoa(svgData);
+                          img.onerror = (err) => {
+                            console.error('Error al cargar la imagen:', err);
+                            alert('Error al generar la imagen. Por favor intente de nuevo.');
+                          };
+                          
+                          img.src = 'data:image/svg+xml;base64,' + btoa(svgWithSize);
                         }}
                         size="sm"
                         className="flex-1"
