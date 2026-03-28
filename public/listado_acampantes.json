@@ -140,6 +140,16 @@
     "apellidos": "Ames Rodriguez "
   },
   {
+    "cedula": 34852145,
+    "nombres": "Santiago ",
+    "apellidos": "Calero"
+  },
+  {
+    "cedula": 34778869,
+    "nombres": "Oriana Hermione ",
+    "apellidos": "Quevedo González "
+  },
+  {
     "cedula": 34762366,
     "nombres": "Jhosuan ",
     "apellidos": "avila "
@@ -400,6 +410,11 @@
     "apellidos": "Jaimes Flores "
   },
   {
+    "cedula": 30161750,
+    "nombres": "Sara",
+    "apellidos": "Tabares"
+  },
+  {
     "cedula": 30094311,
     "nombres": "DANIELA AURORA",
     "apellidos": "BARRIOS AVALO"
@@ -438,6 +453,11 @@
     "cedula": 28480822,
     "nombres": "Mari Angel",
     "apellidos": "Baute Mendoza "
+  },
+  {
+    "cedula": 28067207,
+    "nombres": "SELENNY NOHEMI",
+    "apellidos": "D’LUIS TOVAR"
   },
   {
     "cedula": 28067203,
@@ -595,6 +615,11 @@
     "apellidos": "Rodríguez Manzo"
   },
   {
+    "cedula": 18435218,
+    "nombres": "Helennys ",
+    "apellidos": "Alvarez"
+  },
+  {
     "cedula": 18360722,
     "nombres": "Sheyla ",
     "apellidos": "Gonzalez"
@@ -608,6 +633,11 @@
     "cedula": 17807205,
     "nombres": "Marilli Hurtado",
     "apellidos": "Hurtado Hernández "
+  },
+  {
+    "cedula": 17552585,
+    "nombres": "Jonathan ",
+    "apellidos": "Lopez"
   },
   {
     "cedula": 16784424,

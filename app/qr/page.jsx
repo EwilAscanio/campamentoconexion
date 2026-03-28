@@ -118,7 +118,7 @@ export default function QrGenerator() {
                     value={cedula}
                     onChange={(e) => setCedula(e.target.value)}
                     onKeyPress={handleKeyPress}
-                    className="text-lg py-6 shadow-inner bg-white"
+                    className="text-lg py-6 shadow-inner bg-white text-slate-950 focus:ring-primary/80 focus:ring-2 focus:ring-offset-0 focus-visible:ring-primary/80 focus-visible:ring-2 focus-visible:ring-offset-0"
                   />
                 </div>
                 <div className="flex items-end w-full md:w-auto">
@@ -220,7 +220,7 @@ export default function QrGenerator() {
           {/* Mensaje inicial */}
           {!acampante && !error && !isLoading && (
             <Card className="border-none shadow-sm bg-white/30 backdrop-blur-sm mt-10">
-              <CardContent className="p-8 text-center text-slate-600 font-medium">
+              <CardContent className="p-8 text-center text-primary font-medium">
                 Ingresa tu número de cédula arriba para generar tu pase personal de comedor.
               </CardContent>
             </Card>
