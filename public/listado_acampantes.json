@@ -85,6 +85,11 @@
     "apellidos": "Perez"
   },
   {
+    "cedula": 95352923,
+    "nombres": "MAXIMILIANO GAEL ",
+    "apellidos": "MEDINA PIÑANGO "
+  },
+  {
     "cedula": 84564145,
     "nombres": "Mishel",
     "apellidos": "Iscala"
@@ -133,6 +138,11 @@
     "cedula": 36252136,
     "nombres": "Samuel Danie ",
     "apellidos": "Rivas Isturiz "
+  },
+  {
+    "cedula": 36246668,
+    "nombres": "Augusto ",
+    "apellidos": "Álvarez "
   },
   {
     "cedula": 36234499,
@@ -375,6 +385,11 @@
     "apellidos": "Rodríguez Carrillo "
   },
   {
+    "cedula": 32763876,
+    "nombres": "Miguel de Jesus",
+    "apellidos": "Bracho Pereira"
+  },
+  {
     "cedula": 32697175,
     "nombres": "victoria valentina",
     "apellidos": "peña hurtado"
@@ -533,6 +548,11 @@
     "cedula": 28067203,
     "nombres": "Marlyn Gabriela",
     "apellidos": "Baute Mendoza"
+  },
+  {
+    "cedula": 28035520,
+    "nombres": "Yelian ",
+    "apellidos": "Gonzalez "
   },
   {
     "cedula": 27919273,
